@@ -18,8 +18,7 @@ export interface ProvidersProps {
   themeProps?: ThemeProviderProps;
 }
 
-const alchemyId = "ZHGFfZoK6R2ZeW-Dvo7DcA3lShloPp6s"
-const walletConnectProjectId= "b81da339e88312132666831663efe9a7"
+const walletConnectProjectId= process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!
 
 const { publicClient, chains } = configureChains(
 	[ariseChain],
