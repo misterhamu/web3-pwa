@@ -2,8 +2,8 @@ import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.scss";
-import { Providers } from "./providers";
 import Navbar from "@components/Navbar";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={clsx("min-h-screen bg antialiased")}>
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers >
           <div className="relative flex flex-col min-h-screen">
             <Navbar />
             <main className="mb-6 relative px-4 mt-4 flex-1">{children}</main>
