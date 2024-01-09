@@ -3,11 +3,13 @@ import { ariseChain } from "@/config/web3";
 import {
   Chain,
   RainbowKitProvider,
+  connectorsForWallets,
   getDefaultWallets,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import '@rainbow-me/rainbowkit/styles.css';
+import "@rainbow-me/rainbowkit/styles.css";
+import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets";
 type Props = {
   children: React.ReactNode;
 };
@@ -17,11 +19,17 @@ const { publicClient, chains } = configureChains(
   [publicProvider()]
 );
 
-const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
-  chains,
-});
+const connectors = connectorsForWallets([
+  {
+    groupName: "METAMASK",
+    wallets: [
+      metaMaskWallet({
+        projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
+        chains,
+      }),
+    ],
+  },
+]);
 
 const wagmiConfig = createConfig({
   autoConnect: true,
