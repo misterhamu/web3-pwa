@@ -1,6 +1,4 @@
-import { Chain } from "wagmi";
-
-export const ariseChain: Chain = {
+export const ariseChain: any = {
     id: 4833,
     name: 'Arise Testnet',
     nativeCurrency: {
@@ -15,12 +13,6 @@ export const ariseChain: Chain = {
 		default: {
 			http: ['https://aster-rpc-nonprd.arisetech.dev'],
 		},
-	},
-	
-
-	blockExplorers:{
-		default: { name: "SnowTrace", url: "https://snowtrace.io" },
-
 	},
     testnet: true,
 }
