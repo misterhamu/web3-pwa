@@ -10,14 +10,11 @@ import * as React from "react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
-import "@rainbow-me/rainbowkit/styles.css";
 import {
-  RainbowKitProvider,
-  getDefaultWallets,
   connectorsForWallets,
-  Locale,
-  Chain,
+  RainbowKitProvider
 } from "@rainbow-me/rainbowkit";
+import "@rainbow-me/rainbowkit/styles.css";
 
 import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets";
 
@@ -29,7 +26,7 @@ export interface ProvidersProps {
 const walletConnectProjectId =
   process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!;
 
-const ariseChain: Chain = {
+const ariseChain: any = {
   id: 4833,
   name: "Arise Testnet",
   iconUrl: `${process.env.NEXT_PUBLIC_URL}/images/arise-network.png`,
