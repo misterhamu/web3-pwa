@@ -1,18 +1,13 @@
 "use client";
-import React from "react";
 import {
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
-  Navbar as NextUINavbar,
+  Navbar as NextUINavbar
 } from "@nextui-org/navbar";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import NextLink from "next/link";
-import Image from "next/image";
-import { ThemeSwitch } from "./Theme-switch";
 import { useAccount } from "wagmi";
 import Profile from "./Account";
-import { WalletOptions } from "./WalletOptions";
-import { ConnectKitButton } from "connectkit";
 
 type Props = {};
 
@@ -20,7 +15,7 @@ export default function Navbar({}: Props) {
   function ConnectWallet() {
     const { isConnected } = useAccount();
     if (isConnected) return <Profile />;
-    return    <ConnectKitButton />;
+    return    <ConnectButton />;
   }
 
   return (

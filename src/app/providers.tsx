@@ -7,50 +7,87 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProviderProps } from "next-themes/dist/types";
 import * as React from "react";
 
-import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains";
-import { ConnectKitProvider, ConnectKitButton, getDefaultConfig } from "connectkit";
-import { WagmiConfig, configureChains, createConfig } from "wagmi";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
-import { ariseChain } from "@/config/web3";
+
+import "@rainbow-me/rainbowkit/styles.css";
+import {
+  RainbowKitProvider,
+  getDefaultWallets,
+  connectorsForWallets,
+  Locale,
+  Chain,
+} from "@rainbow-me/rainbowkit";
+
+import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets";
 
 export interface ProvidersProps {
   children: React.ReactNode;
   themeProps?: ThemeProviderProps;
 }
 
-const walletConnectProjectId= process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!
+const walletConnectProjectId =
+  process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!;
 
-const { publicClient, chains } = configureChains(
+const ariseChain: Chain = {
+  id: 4833,
+  name: "Arise Testnet",
+  iconUrl: `${process.env.NEXT_PUBLIC_URL}/images/arise-network.png`,
+  iconBackground: "#fff",
+  nativeCurrency: {
+    decimals: 18,
+    name: "Arise",
+    symbol: "Arise",
+  },
+  rpcUrls: {
+    public: {
+      http: ["https://aster-rpc-nonprd.arisetech.dev"],
+    },
+    default: {
+      http: ["https://aster-rpc-nonprd.arisetech.dev"],
+    },
+  },
+  testnet: true,
+};
+
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   [ariseChain],
-	[
+  [
     jsonRpcProvider({
       rpc: (chain) => ({ http: chain.rpcUrls.default.http[0] }),
     }),
-	],
+  ]
 );
 
-const config = createConfig(
-  getDefaultConfig({
-    appName: "Your App Name",
-    walletConnectProjectId,
-    chains,
-  }),
-);
+const connectors = connectorsForWallets([
+  {
+    groupName: "Meta Mask Wallet",
+    wallets: [metaMaskWallet({ chains, walletConnectVersion: "1" })],
+  },
+]);
 
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient,
+  webSocketPublicClient,
+});
 
+const appInfo = {
+  appName: "POC Web3 PWA",
+};
 
 export function Providers({ children, themeProps }: ProvidersProps) {
   const queryClient = new QueryClient();
 
   return (
-    <WagmiConfig config={config}>
+    <WagmiConfig config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-      <ConnectKitProvider >
+        <RainbowKitProvider appInfo={appInfo} chains={chains}>
           <NextUIProvider>
             <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
           </NextUIProvider>
-          <ConnectKitButton />
-      </ConnectKitProvider>
+        </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiConfig>
   );
