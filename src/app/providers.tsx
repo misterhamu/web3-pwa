@@ -59,7 +59,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 const connectors = connectorsForWallets([
   {
     groupName: "Meta Mask Wallet",
-    wallets: [metaMaskWallet({ chains, walletConnectVersion: "1" })],
+    wallets: [metaMaskWallet({ chains,projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID })],
   },
 ]);
 
