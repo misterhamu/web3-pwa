@@ -21,11 +21,11 @@ export interface ProvidersProps {
 const walletConnectProjectId= process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!
 
 const { publicClient, chains } = configureChains(
-	[ariseChain],
+  [ariseChain],
 	[
-		jsonRpcProvider({
-			rpc: (chain) => ({ http: chain.rpcUrls.default.http[0] }),
-		}),
+    jsonRpcProvider({
+      rpc: (chain) => ({ http: chain.rpcUrls.default.http[0] }),
+    }),
 	],
 );
 

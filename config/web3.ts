@@ -8,7 +8,7 @@ export const ariseChain: Chain = {
 		name: 'Arise',
 		symbol: 'Arise',
     },
-    rpcUrls: {
+	rpcUrls: {
 		public: {
 			http: ['https://aster-rpc-nonprd.arisetech.dev'],
 		},
@@ -16,8 +16,11 @@ export const ariseChain: Chain = {
 			http: ['https://aster-rpc-nonprd.arisetech.dev'],
 		},
 	},
+	
+
+	blockExplorers:{
+		default: { name: "SnowTrace", url: "https://snowtrace.io" },
+
+	},
     testnet: true,
 }
-
-
-
