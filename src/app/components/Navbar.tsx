@@ -1,4 +1,5 @@
-import React from 'react'
+"use client";
+import React from "react";
 import {
   NavbarBrand,
   NavbarContent,
@@ -7,12 +8,21 @@ import {
 } from "@nextui-org/navbar";
 import NextLink from "next/link";
 import Image from "next/image";
-import { ThemeSwitch } from './Theme-switch';
+import { ThemeSwitch } from "./Theme-switch";
+import { useAccount } from "wagmi";
+import Profile from "./Account";
+import { WalletOptions } from "./WalletOptions";
+import { ConnectKitButton } from "connectkit";
 
-
-type Props = {}
+type Props = {};
 
 export default function Navbar({}: Props) {
+  function ConnectWallet() {
+    const { isConnected } = useAccount();
+    if (isConnected) return <Profile />;
+    return    <ConnectKitButton />;
+  }
+
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5" justify="start">
@@ -21,18 +31,14 @@ export default function Navbar({}: Props) {
             className="flex justify-start items-center gap-2 mt-2 "
             href="/"
           >
-            <Image src={"/fit-me-logo.png"} alt="" width={60} height={40}
-            className='rounded-lg'
-            ></Image>
-            <p className='text-3xl font-semibold'>FitMe</p>
+            <span className="text-3xl font-semibold">Web3</span>
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="basis-1 pl-4" justify="end">
-        <ThemeSwitch />
+        {/* <ThemeSwitch /> */}
+        <ConnectWallet />
       </NavbarContent>
-
-
     </NextUINavbar>
-  )
+  );
 }

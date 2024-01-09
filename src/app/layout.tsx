@@ -1,27 +1,18 @@
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "./components/Navbar";
 import "./globals.scss";
 import { Providers } from "./providers";
-
+import Navbar from "@components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "PWA",
-  description:
-    "Description",
+  description: "Description",
   generator: "Next.js",
   manifest: "/manifest.json",
-  keywords: [
-    "Fitness",
-    "Exercise",
-    "Personalized",
-    "Tracking",
-    "Workouts",
-    "Motivation",
-  ],
+  keywords: [],
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
   authors: [
     { name: "Thitipat Na Nakorn" },
@@ -49,9 +40,7 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col min-h-screen">
             <Navbar />
-            <main className="mb-6 relative px-4 mt-4 flex-1">
-              {children}
-            </main>
+            <main className="mb-6 relative px-4 mt-4 flex-1">{children}</main>
             <footer className="w-full flex items-center justify-center pt-12">
               <span className="text-default-600">
                 2024 © Powered by misterhamu

@@ -19,7 +19,6 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
       "@/types/*": ["./types/*"],
       "@/config/*": ["./config/*"],
       "@components/*": ["./src/app/components/*"]

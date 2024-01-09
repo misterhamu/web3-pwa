@@ -5,6 +5,10 @@ const nextConfig = {
     compiler: {
       removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
     },
+    webpack: (config) => {
+      config.resolve.fallback = { fs: false, net: false, tls: false };
+      return config;
+    },
   };
   
   // Configuration object tells the next-pwa plugin 
