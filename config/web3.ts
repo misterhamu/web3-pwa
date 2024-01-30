@@ -1,6 +1,7 @@
 export const ariseChain: any = {
     id: 4833,
     name: 'Arise Testnet',
+	network: 'arisetestnet',
     nativeCurrency: {
         decimals: 18,
 		name: 'Arise',

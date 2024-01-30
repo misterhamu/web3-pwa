@@ -14,8 +14,8 @@ type Props = {};
 export default function Navbar({}: Props) {
   function ConnectWallet() {
     const { isConnected } = useAccount();
-    if (isConnected) return <Profile />;
-    return    <ConnectButton />;
+    // if (isConnected) return <Profile />;
+    return    <ConnectButton chainStatus="name" showBalance={false} />;
   }
 
   return (

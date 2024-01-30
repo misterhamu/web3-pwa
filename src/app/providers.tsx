@@ -26,10 +26,17 @@ const connectors = connectorsForWallets([
       metaMaskWallet({
         projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
         chains,
+        walletConnectVersion: "2"
       }),
     ],
   },
 ]);
+
+// const { connectors } = getDefaultWallets({
+//   appName: 'nextjs-chakraui-rainbow-template',
+//   projectId: 'e72d746a6792f5d3428e42892f52a725',
+//   chains
+// });
 
 const wagmiConfig = createConfig({
   autoConnect: true,
